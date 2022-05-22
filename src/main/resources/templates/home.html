@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>upload/download</title>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div>
+        <h2> UPLOAD & DOWNLOAD </h2>
+    </div>
+    <div class="text-success">
+        <h3>[[${message}]]</h3>
+    </div>
+    <div class="row border rounded m-3 p-3">
+        <th:block th:each="files : ${fileList}">
+            <div class="col">
+                <div>
+                    <a href="@{'/download'?id=' + ${files.id}">
+                        [[${files.name}]]
+                    </a>
+                </div>
+                <div>
+                    [[${files.size}]] bytes
+                </div>
+            </div>
+        </th:block>
+    </div>
+    <form th:action="@{/upload}" method="post"
+          enctype="multipart/form-data"
+          style="max-width: 600px; margin: 0 auto">
+        <div class="border rounded m-3">
+            <p>
+                <input type="file" name="uploadFile" required/>
+            </p>
+            <p>
+                <input type="submit" value="Upload" class="btn btn-primary"/>
+            </p>
+        </div>
+    </form>
+</div>
+</body>
+</html>
